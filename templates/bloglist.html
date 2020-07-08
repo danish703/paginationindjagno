@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog list</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+<h1>My Blog</h1>
+ {% for post in posts %}
+    <h2>
+        <a href="#">
+        {{ post.title }}
+        </a>
+    </h2>
+     <p class="date">
+     Published {{ post.publish }} by {{ post.author }}
+     </p>
+     {{ post.body|truncatewords:30|linebreaks }}
+{% endfor %}
+
+<div class="pagination">
+ <span class="step-links">
+ {% if page.has_previous %}
+ <a href="?page={{ page.previous_page_number }}">Previous</a>
+ {% endif %}
+ <span class="current">
+ Page {{ page.number }} of {{ page.paginator.num_pages }}.
+ </span>
+ {% if page.has_next %}
+ <a href="?page={{ page.next_page_number }}">Next</a>
+ {% endif %}
+ </span>
+</div>
+
+</body>
+</html>
